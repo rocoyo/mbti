@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登錄頁面</title>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js"></script>
+    <style>
+        /* 自定義樣式 */
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .login-button {
+            width: 200px;
+            height: 40px;
+            margin: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 5px;
+            background-color: white;
+            color: #4285F4;
+            font-size: 16px;
+            cursor: pointer;
+            border: 1px solid #4285F4;
+        }
+        .login-button:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+    <h1>登錄</h1>
+    
+    <!-- Google 登入按鈕 -->
+    <div id="g_id_onload"
+         data-client_id="YOUR_GOOGLE_CLIENT_ID"
+         data-callback="handleCredentialResponse">
+    </div>
+    <div class="login-button" onclick="handleGoogleLogin()">使用 Google 登入</div>
+
+    <!-- Apple 登入按鈕 -->
+    <div id="appleid-signin" data-color="black" data-border="true" data-type="sign in"></div>
+
+    <script>
+        // 初始化 Apple 登入
+        document.addEventListener('DOMContentLoaded', function() {
+            AppleID.auth.init({
+                clientId: 'YOUR_APPLE_CLIENT_ID', // 替換為你的 Apple 客戶端 ID
+                scope: 'email',
+                redirectURI: 'YOUR_REDIRECT_URI', // 替換為你的重定向 URI
+                usePopup: true // 使用彈出窗口
+            });
+        });
+
+        function handleAppleLogin() {
+            AppleID.auth.signIn().then(function(response) {
+                console.log(response); // 用戶信息
+                // 在這裡處理用戶登錄邏輯
+                window.location.href = 'index.html'; // 登錄成功後重定向到問題頁面
+            }).catch(function(error) {
+                console.error(error);
+            });
+        }
+
+        function handleCredentialResponse(response) {
+            const user = jwt_decode(response.credential);
+            console.log(user); // 用戶信息
+            // 在這裡處理用戶登錄邏輯
+            window.location.href = 'index.html'; // 登錄成功後重定向到問題頁面
+        }
+
+        function handleGoogleLogin() {
+            // 觸發 Google 登入
+            google.accounts.id.prompt(); // 這將顯示 Google 登入提示
+        }
+    </script>
+</body>
+</html>

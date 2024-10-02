@@ -118,7 +118,7 @@ function calculateResults() {
     
     // MBTI類型補充說明
     const descriptions = {
-        ISTJ: "檢察官型：注重責任、傳統和秩序，擅長規劃和遵守規則。對細節和效率有高度要求。",
+        ISTJ: "檢察官型重責任、傳統和秩序，擅長規劃和遵守規則。對細節和效率有高度要求。",
         ISFJ: "守護者型：非常關懷他人，樂於提供支持，忠誠可靠。喜歡保護弱勢群體，重視人際關係。",
         INFJ: "提倡者型：內心理想主義，富有洞察力和直覺，關心社會問題，渴望改變世界。",
         INTJ: "建築師型：冷靜、理性，富有遠見，擅長長期規劃和戰略思考，對自己的能力充滿自信。",
@@ -128,7 +128,7 @@ function calculateResults() {
         INTP: "思考者型：喜歡分析理論和抽象概念，思維邏輯性強，對知識充滿熱情。",
         ESTP: "企業家型：充滿活力，熱衷於冒險和挑戰，行動導向，能迅速做出決策。",
         ESFP: "表演者型：外向活潑，喜歡成為注意的焦點，富有感染力，享受與人互動。",
-        ENFP: "活動家型：充滿熱情和創意，喜歡探索新的點子和人際關係，擁有開放的心態。",
+        ENFP: "活動家型：充滿熱情和創意，喜歡探索新的點子和人際關係，擁有開放心。",
         ENTP: "辯論家型：喜歡辯論和挑戰現狀，擅長解決問題，創造性思維強。",
         ESTJ: "執行者型：務實、果斷，重視秩序和效率，擅長組織和管理，喜歡掌控局面。",
         ESFJ: "供應者型：注重他人感受，重視傳統和社會責任，擅長維護和諧。",
@@ -155,3 +155,25 @@ document.querySelector('.close').onclick = function() {
 
 // 初始化顯示第一個問題
 showQuestion();
+
+function handleAppleLogin() {
+    AppleID.auth.signIn().then(function(response) {
+        console.log(response); // 用戶信息
+        sessionStorage.setItem('user', JSON.stringify(response)); // 存儲用戶信息
+        window.location.href = 'index.html'; // 登錄成功後重定向到問題頁面
+    }).catch(function(error) {
+        console.error(error);
+    });
+}
+
+function handleCredentialResponse(response) {
+    const user = jwt_decode(response.credential);
+    console.log(user); // 用戶信息
+    sessionStorage.setItem('user', JSON.stringify(user)); // 存儲用戶信息
+    window.location.href = 'index.html'; // 登錄成功後重定向到問題頁面
+}
+
+function handleGoogleLogin() {
+    // 觸發 Google 登入
+    google.accounts.id.prompt(); // 這將顯示 Google 登入提示
+}

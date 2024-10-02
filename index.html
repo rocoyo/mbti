@@ -1,22 +1,20 @@
 <!DOCTYPE html>
-<html lang="ko">
-
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>簡單的性格型別測試</title>
     <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
 </head>
-
 <body>
     <h1>簡單的性格型別測試</h1>
-    <form id="quiz">
-        <div id="question-container"></div>
-        <div class="submit-button">
-            <button type="button" id="prev-button" onclick="prevQuestion()">上一題</button>
-            <button type="button" id="next-button" onclick="nextQuestion()">下一題</button>
-        </div>
-    </form>
+    
+    <div id="question-container"></div>
+    <div class="submit-button">
+        <button type="button" id="prev-button" onclick="prevQuestion()">上一題</button>
+        <button type="button" id="next-button" onclick="nextQuestion()">下一題</button>
+    </div>
 
     <div id="myModal" class="modal">
         <div class="modal-content">
@@ -25,7 +23,14 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
-</body>
+    <script>
+        // 檢查用戶是否已登錄
+        if (!sessionStorage.getItem('user')) {
+            // 如果用戶未登錄，重定向到登錄頁面
+            window.location.href = 'login.html';
+        }
 
+        // 其他問題邏輯...
+    </script>
+</body>
 </html>
