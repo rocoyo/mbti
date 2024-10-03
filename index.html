@@ -1,27 +1,33 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>簡單的性格型別測試</title>
+    <title>極簡 MBTI測試</title>
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
 </head>
+
 <body>
-    <h1>簡單的性格型別測試</h1>
-    
-    <div id="question-container"></div>
-    <div class="submit-button">
-        <button type="button" id="prev-button" onclick="prevQuestion()">上一題</button>
-        <button type="button" id="next-button" onclick="nextQuestion()">下一題</button>
+    <div class="title-box">
+        <h1>極簡 MBTI測試</h1>
     </div>
+    <form id="quiz">
+        <div class="question-container" id="question-container"></div>
+        <div class="navigation-buttons">
+            <button type="button" id="prevButton" onclick="prevQuestion()" disabled>上一條</button>
+            <button type="button" id="nextButton" onclick="nextQuestion()">下一條</button>
+        </div>
+    </form>
 
     <div id="myModal" class="modal">
         <div class="modal-content">
-            <span class="close">&times;</span>
+            <span class="close" onclick="closeModal()">&times;</span>
             <div id="results"></div>
         </div>
     </div>
 
+    <script src="script.js"></script>
 </body>
+
 </html>
